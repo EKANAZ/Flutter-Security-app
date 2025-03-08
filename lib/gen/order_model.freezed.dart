@@ -293,15 +293,17 @@ OrderModel _$OrderModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$OrderModel {
   @JsonKey(name: "_id")
-  String get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   @JsonKey(name: "userId")
-  UserModel? get userId => throw _privateConstructorUsedError; // Use UserModel
+  UserModel? get userId => throw _privateConstructorUsedError;
   @JsonKey(name: "products")
-  List<ProductItem>? get products => throw _privateConstructorUsedError; // List of ProductItem
+  List<ProductItem>? get products => throw _privateConstructorUsedError;
   @JsonKey(name: "totalAmount")
   double? get totalAmount => throw _privateConstructorUsedError;
   @JsonKey(name: "status")
   String? get status => throw _privateConstructorUsedError;
+  @JsonKey(name: "createdAt")
+  DateTime? get createdAt => throw _privateConstructorUsedError;
 
   /// Serializes this OrderModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -321,11 +323,12 @@ abstract class $OrderModelCopyWith<$Res> {
   ) = _$OrderModelCopyWithImpl<$Res, OrderModel>;
   @useResult
   $Res call({
-    @JsonKey(name: "_id") String id,
+    @JsonKey(name: "_id") String? id,
     @JsonKey(name: "userId") UserModel? userId,
     @JsonKey(name: "products") List<ProductItem>? products,
     @JsonKey(name: "totalAmount") double? totalAmount,
     @JsonKey(name: "status") String? status,
+    @JsonKey(name: "createdAt") DateTime? createdAt,
   });
 
   $UserModelCopyWith<$Res>? get userId;
@@ -346,19 +349,20 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? userId = freezed,
     Object? products = freezed,
     Object? totalAmount = freezed,
     Object? status = freezed,
+    Object? createdAt = freezed,
   }) {
     return _then(
       _value.copyWith(
             id:
-                null == id
+                freezed == id
                     ? _value.id
                     : id // ignore: cast_nullable_to_non_nullable
-                        as String,
+                        as String?,
             userId:
                 freezed == userId
                     ? _value.userId
@@ -379,6 +383,11 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
                     ? _value.status
                     : status // ignore: cast_nullable_to_non_nullable
                         as String?,
+            createdAt:
+                freezed == createdAt
+                    ? _value.createdAt
+                    : createdAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
           )
           as $Val,
     );
@@ -409,11 +418,12 @@ abstract class _$$OrderModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    @JsonKey(name: "_id") String id,
+    @JsonKey(name: "_id") String? id,
     @JsonKey(name: "userId") UserModel? userId,
     @JsonKey(name: "products") List<ProductItem>? products,
     @JsonKey(name: "totalAmount") double? totalAmount,
     @JsonKey(name: "status") String? status,
+    @JsonKey(name: "createdAt") DateTime? createdAt,
   });
 
   @override
@@ -434,19 +444,20 @@ class __$$OrderModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? userId = freezed,
     Object? products = freezed,
     Object? totalAmount = freezed,
     Object? status = freezed,
+    Object? createdAt = freezed,
   }) {
     return _then(
       _$OrderModelImpl(
         id:
-            null == id
+            freezed == id
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as String?,
         userId:
             freezed == userId
                 ? _value.userId
@@ -467,6 +478,11 @@ class __$$OrderModelImplCopyWithImpl<$Res>
                 ? _value.status
                 : status // ignore: cast_nullable_to_non_nullable
                     as String?,
+        createdAt:
+            freezed == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
       ),
     );
   }
@@ -476,11 +492,12 @@ class __$$OrderModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$OrderModelImpl implements _OrderModel {
   const _$OrderModelImpl({
-    @JsonKey(name: "_id") required this.id,
+    @JsonKey(name: "_id") this.id,
     @JsonKey(name: "userId") this.userId,
     @JsonKey(name: "products") final List<ProductItem>? products,
     @JsonKey(name: "totalAmount") this.totalAmount,
     @JsonKey(name: "status") this.status,
+    @JsonKey(name: "createdAt") this.createdAt,
   }) : _products = products;
 
   factory _$OrderModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -488,13 +505,11 @@ class _$OrderModelImpl implements _OrderModel {
 
   @override
   @JsonKey(name: "_id")
-  final String id;
+  final String? id;
   @override
   @JsonKey(name: "userId")
   final UserModel? userId;
-  // Use UserModel
   final List<ProductItem>? _products;
-  // Use UserModel
   @override
   @JsonKey(name: "products")
   List<ProductItem>? get products {
@@ -505,17 +520,19 @@ class _$OrderModelImpl implements _OrderModel {
     return EqualUnmodifiableListView(value);
   }
 
-  // List of ProductItem
   @override
   @JsonKey(name: "totalAmount")
   final double? totalAmount;
   @override
   @JsonKey(name: "status")
   final String? status;
+  @override
+  @JsonKey(name: "createdAt")
+  final DateTime? createdAt;
 
   @override
   String toString() {
-    return 'OrderModel(id: $id, userId: $userId, products: $products, totalAmount: $totalAmount, status: $status)';
+    return 'OrderModel(id: $id, userId: $userId, products: $products, totalAmount: $totalAmount, status: $status, createdAt: $createdAt)';
   }
 
   @override
@@ -528,7 +545,9 @@ class _$OrderModelImpl implements _OrderModel {
             const DeepCollectionEquality().equals(other._products, _products) &&
             (identical(other.totalAmount, totalAmount) ||
                 other.totalAmount == totalAmount) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -540,6 +559,7 @@ class _$OrderModelImpl implements _OrderModel {
     const DeepCollectionEquality().hash(_products),
     totalAmount,
     status,
+    createdAt,
   );
 
   /// Create a copy of OrderModel
@@ -558,11 +578,12 @@ class _$OrderModelImpl implements _OrderModel {
 
 abstract class _OrderModel implements OrderModel {
   const factory _OrderModel({
-    @JsonKey(name: "_id") required final String id,
+    @JsonKey(name: "_id") final String? id,
     @JsonKey(name: "userId") final UserModel? userId,
     @JsonKey(name: "products") final List<ProductItem>? products,
     @JsonKey(name: "totalAmount") final double? totalAmount,
     @JsonKey(name: "status") final String? status,
+    @JsonKey(name: "createdAt") final DateTime? createdAt,
   }) = _$OrderModelImpl;
 
   factory _OrderModel.fromJson(Map<String, dynamic> json) =
@@ -570,19 +591,22 @@ abstract class _OrderModel implements OrderModel {
 
   @override
   @JsonKey(name: "_id")
-  String get id;
+  String? get id;
   @override
   @JsonKey(name: "userId")
-  UserModel? get userId; // Use UserModel
+  UserModel? get userId;
   @override
   @JsonKey(name: "products")
-  List<ProductItem>? get products; // List of ProductItem
+  List<ProductItem>? get products;
   @override
   @JsonKey(name: "totalAmount")
   double? get totalAmount;
   @override
   @JsonKey(name: "status")
   String? get status;
+  @override
+  @JsonKey(name: "createdAt")
+  DateTime? get createdAt;
 
   /// Create a copy of OrderModel
   /// with the given fields replaced by the non-null parameter values.
@@ -598,10 +622,12 @@ ProductItem _$ProductItemFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ProductItem {
-  @JsonKey(name: "productId")
-  ProductModel get productId => throw _privateConstructorUsedError;
+  @JsonKey(name: "productId", fromJson: _productIdFromJson)
+  ProductModel? get product => throw _privateConstructorUsedError;
   @JsonKey(name: "quantity")
   int get quantity => throw _privateConstructorUsedError;
+  @JsonKey(name: "_id")
+  String? get id => throw _privateConstructorUsedError;
 
   /// Serializes this ProductItem to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -621,11 +647,13 @@ abstract class $ProductItemCopyWith<$Res> {
   ) = _$ProductItemCopyWithImpl<$Res, ProductItem>;
   @useResult
   $Res call({
-    @JsonKey(name: "productId") ProductModel productId,
+    @JsonKey(name: "productId", fromJson: _productIdFromJson)
+    ProductModel? product,
     @JsonKey(name: "quantity") int quantity,
+    @JsonKey(name: "_id") String? id,
   });
 
-  $ProductModelCopyWith<$Res> get productId;
+  $ProductModelCopyWith<$Res>? get product;
 }
 
 /// @nodoc
@@ -642,19 +670,28 @@ class _$ProductItemCopyWithImpl<$Res, $Val extends ProductItem>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? productId = null, Object? quantity = null}) {
+  $Res call({
+    Object? product = freezed,
+    Object? quantity = null,
+    Object? id = freezed,
+  }) {
     return _then(
       _value.copyWith(
-            productId:
-                null == productId
-                    ? _value.productId
-                    : productId // ignore: cast_nullable_to_non_nullable
-                        as ProductModel,
+            product:
+                freezed == product
+                    ? _value.product
+                    : product // ignore: cast_nullable_to_non_nullable
+                        as ProductModel?,
             quantity:
                 null == quantity
                     ? _value.quantity
                     : quantity // ignore: cast_nullable_to_non_nullable
                         as int,
+            id:
+                freezed == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as String?,
           )
           as $Val,
     );
@@ -664,9 +701,13 @@ class _$ProductItemCopyWithImpl<$Res, $Val extends ProductItem>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $ProductModelCopyWith<$Res> get productId {
-    return $ProductModelCopyWith<$Res>(_value.productId, (value) {
-      return _then(_value.copyWith(productId: value) as $Val);
+  $ProductModelCopyWith<$Res>? get product {
+    if (_value.product == null) {
+      return null;
+    }
+
+    return $ProductModelCopyWith<$Res>(_value.product!, (value) {
+      return _then(_value.copyWith(product: value) as $Val);
     });
   }
 }
@@ -681,12 +722,14 @@ abstract class _$$ProductItemImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    @JsonKey(name: "productId") ProductModel productId,
+    @JsonKey(name: "productId", fromJson: _productIdFromJson)
+    ProductModel? product,
     @JsonKey(name: "quantity") int quantity,
+    @JsonKey(name: "_id") String? id,
   });
 
   @override
-  $ProductModelCopyWith<$Res> get productId;
+  $ProductModelCopyWith<$Res>? get product;
 }
 
 /// @nodoc
@@ -702,19 +745,28 @@ class __$$ProductItemImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? productId = null, Object? quantity = null}) {
+  $Res call({
+    Object? product = freezed,
+    Object? quantity = null,
+    Object? id = freezed,
+  }) {
     return _then(
       _$ProductItemImpl(
-        productId:
-            null == productId
-                ? _value.productId
-                : productId // ignore: cast_nullable_to_non_nullable
-                    as ProductModel,
+        product:
+            freezed == product
+                ? _value.product
+                : product // ignore: cast_nullable_to_non_nullable
+                    as ProductModel?,
         quantity:
             null == quantity
                 ? _value.quantity
                 : quantity // ignore: cast_nullable_to_non_nullable
                     as int,
+        id:
+            freezed == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as String?,
       ),
     );
   }
@@ -724,23 +776,27 @@ class __$$ProductItemImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ProductItemImpl implements _ProductItem {
   const _$ProductItemImpl({
-    @JsonKey(name: "productId") required this.productId,
+    @JsonKey(name: "productId", fromJson: _productIdFromJson) this.product,
     @JsonKey(name: "quantity") required this.quantity,
+    @JsonKey(name: "_id") this.id,
   });
 
   factory _$ProductItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProductItemImplFromJson(json);
 
   @override
-  @JsonKey(name: "productId")
-  final ProductModel productId;
+  @JsonKey(name: "productId", fromJson: _productIdFromJson)
+  final ProductModel? product;
   @override
   @JsonKey(name: "quantity")
   final int quantity;
+  @override
+  @JsonKey(name: "_id")
+  final String? id;
 
   @override
   String toString() {
-    return 'ProductItem(productId: $productId, quantity: $quantity)';
+    return 'ProductItem(product: $product, quantity: $quantity, id: $id)';
   }
 
   @override
@@ -748,15 +804,15 @@ class _$ProductItemImpl implements _ProductItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProductItemImpl &&
-            (identical(other.productId, productId) ||
-                other.productId == productId) &&
+            (identical(other.product, product) || other.product == product) &&
             (identical(other.quantity, quantity) ||
-                other.quantity == quantity));
+                other.quantity == quantity) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, productId, quantity);
+  int get hashCode => Object.hash(runtimeType, product, quantity, id);
 
   /// Create a copy of ProductItem
   /// with the given fields replaced by the non-null parameter values.
@@ -774,19 +830,24 @@ class _$ProductItemImpl implements _ProductItem {
 
 abstract class _ProductItem implements ProductItem {
   const factory _ProductItem({
-    @JsonKey(name: "productId") required final ProductModel productId,
+    @JsonKey(name: "productId", fromJson: _productIdFromJson)
+    final ProductModel? product,
     @JsonKey(name: "quantity") required final int quantity,
+    @JsonKey(name: "_id") final String? id,
   }) = _$ProductItemImpl;
 
   factory _ProductItem.fromJson(Map<String, dynamic> json) =
       _$ProductItemImpl.fromJson;
 
   @override
-  @JsonKey(name: "productId")
-  ProductModel get productId;
+  @JsonKey(name: "productId", fromJson: _productIdFromJson)
+  ProductModel? get product;
   @override
   @JsonKey(name: "quantity")
   int get quantity;
+  @override
+  @JsonKey(name: "_id")
+  String? get id;
 
   /// Create a copy of ProductItem
   /// with the given fields replaced by the non-null parameter values.

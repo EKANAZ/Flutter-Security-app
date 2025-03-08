@@ -80,6 +80,7 @@ class NetworkService {
 
   Future<Map<String, dynamic>> createOrder(String token, List<Map<String, dynamic>> cart) async {
     try {
+      print(" cart: $cart");
       final response = await _dio.post('/orders/create', data: {'products': cart}, options: Options(headers: {'Authorization': 'Bearer $token'}));
       return response.data;
     } catch (e) {
@@ -90,8 +91,35 @@ class NetworkService {
   Future<List<OrderModel>> fetchOrders(String token) async {
     try {
       final response = await _dio.post('/orders/list', data: {}, options: Options(headers: {'Authorization': 'Bearer $token'}));
-      return (response.data as List).map((json) => OrderModel.fromJson(json)).toList();
+
+      // Debug the response
+      print('Response data type: ${response.data.runtimeType}');
+      print('Response data: ${response.data}');
+
+      // Handle null response
+      if (response.data == null) {
+        print('Response data is null');
+        return [];
+      }
+
+      // If it's a Map with a data field, extract it
+      if (response.data is Map) {
+        final responseMap = response.data as Map<String, dynamic>;
+        if (responseMap.containsKey('data') && responseMap['data'] is List) {
+          return (responseMap['data'] as List).map((json) => OrderModel.fromJson(json as Map<String, dynamic>)).toList();
+        }
+      }
+
+      // If it's directly a List
+      if (response.data is List) {
+        return (response.data as List).map((json) => OrderModel.fromJson(json as Map<String, dynamic>)).toList();
+      }
+
+      // If we get here, the response format is unexpected
+      print('Unexpected response format: ${response.data}');
+      return [];
     } catch (e) {
+      print('Error details: $e');
       throw 'Failed to fetch orders: $e';
     }
   }

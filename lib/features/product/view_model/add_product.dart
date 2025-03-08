@@ -272,6 +272,7 @@ class EcommerceViewModel extends ChangeNotifier {
       _orders = await _networkService.fetchOrders(_accessToken!);
       notifyListeners();
     } catch (e) {
+      print('Failed to fetch orders: $e');
       _errorMessage = 'Failed to fetch orders: $e';
     }
   }

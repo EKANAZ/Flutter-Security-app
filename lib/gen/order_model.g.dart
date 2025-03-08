@@ -26,7 +26,7 @@ Map<String, dynamic> _$$ProductModelImplToJson(_$ProductModelImpl instance) =>
 
 _$OrderModelImpl _$$OrderModelImplFromJson(Map<String, dynamic> json) =>
     _$OrderModelImpl(
-      id: json['_id'] as String,
+      id: json['_id'] as String?,
       userId:
           json['userId'] == null
               ? null
@@ -37,28 +37,34 @@ _$OrderModelImpl _$$OrderModelImplFromJson(Map<String, dynamic> json) =>
               .toList(),
       totalAmount: (json['totalAmount'] as num?)?.toDouble(),
       status: json['status'] as String?,
+      createdAt:
+          json['createdAt'] == null
+              ? null
+              : DateTime.parse(json['createdAt'] as String),
     );
 
 Map<String, dynamic> _$$OrderModelImplToJson(_$OrderModelImpl instance) =>
     <String, dynamic>{
-      '_id': instance.id,
+      if (instance.id case final value?) '_id': value,
       if (instance.userId?.toJson() case final value?) 'userId': value,
       if (instance.products?.map((e) => e.toJson()).toList() case final value?)
         'products': value,
       if (instance.totalAmount case final value?) 'totalAmount': value,
       if (instance.status case final value?) 'status': value,
+      if (instance.createdAt?.toIso8601String() case final value?)
+        'createdAt': value,
     };
 
 _$ProductItemImpl _$$ProductItemImplFromJson(Map<String, dynamic> json) =>
     _$ProductItemImpl(
-      productId: ProductModel.fromJson(
-        json['productId'] as Map<String, dynamic>,
-      ),
+      product: _productIdFromJson(json['productId']),
       quantity: (json['quantity'] as num).toInt(),
+      id: json['_id'] as String?,
     );
 
 Map<String, dynamic> _$$ProductItemImplToJson(_$ProductItemImpl instance) =>
     <String, dynamic>{
-      'productId': instance.productId.toJson(),
+      if (instance.product?.toJson() case final value?) 'productId': value,
       'quantity': instance.quantity,
+      if (instance.id case final value?) '_id': value,
     };

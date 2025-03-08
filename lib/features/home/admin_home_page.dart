@@ -116,12 +116,15 @@ class AdminHomePage extends StatelessWidget {
 
   // Stat Cards Row
   Widget _buildStatCards(BuildContext context, EcommerceViewModel vm) {
-    return GridView.count(crossAxisCount: 3, crossAxisSpacing: 10, mainAxisSpacing: 10, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), children: [_buildStatCard(context, 'Orders', vm.orders.length.toString(), Icons.shopping_bag_outlined, Colors.blue), _buildStatCard(context, 'Products', vm.products.length.toString(), Icons.inventory_2_outlined, Colors.amber), _buildStatCard(context, 'Customers', vm.customers.length.toString(), Icons.people_outline, Colors.green)]);
+    return SizedBox(child: GridView.count(crossAxisCount: 3, crossAxisSpacing: 12, mainAxisSpacing: 10, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), children: [_buildStatCard(context, 'Orders', vm.orders.length.toString(), Icons.shopping_bag_outlined, Colors.blue), _buildStatCard(context, 'Products', vm.products.length.toString(), Icons.inventory_2_outlined, Colors.amber), _buildStatCard(context, 'Customers', vm.customers.length.toString(), Icons.people_outline, Colors.green)]));
   }
 
   // Individual Stat Card
   Widget _buildStatCard(BuildContext context, String title, String count, IconData icon, Color color) {
-    return Card(elevation: 4, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), child: Container(padding: const EdgeInsets.all(16), decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), border: Border.all(color: color.withOpacity(0.3), width: 1)), child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [Icon(icon, size: 32, color: color), const SizedBox(height: 8), Text(count, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: color)), const SizedBox(height: 4), Text(title, style: TextStyle(fontSize: 14, color: Colors.grey[700]), textAlign: TextAlign.center)])));
+    return SizedBox(
+      height: 300, // Increased height
+      child: Container(padding: const EdgeInsets.all(16), decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), border: Border.all(color: color.withOpacity(0.3), width: 1)), child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [Icon(icon, size: 25, color: color), Text(count, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: color)), const SizedBox(height: 4), Text(title, style: TextStyle(fontSize: 14, color: Colors.grey[700]), textAlign: TextAlign.center)])),
+    );
   }
 
   // Orders Section
@@ -154,13 +157,13 @@ class AdminHomePage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(children: [const Icon(Icons.person_outline, size: 16, color: Colors.grey), const SizedBox(width: 4), Text('Customer: ${order.userId?.name  ?? order.userId?.userName}', style: const TextStyle(fontSize: 14))]),
+                          Row(children: [const Icon(Icons.person_outline, size: 16, color: Colors.grey), const SizedBox(width: 4), Text('Customer: ${order.userId?.name ?? order.userId?.userName}', style: const TextStyle(fontSize: 14))]),
                           const SizedBox(height: 4),
                           Row(children: [const Icon(Icons.email_outlined, size: 16, color: Colors.grey), const SizedBox(width: 4), Text('Email: ${order.userId?.email}', style: const TextStyle(fontSize: 14))]),
                           const Divider(height: 16),
                           const Text('Products:', style: TextStyle(fontWeight: FontWeight.bold)),
                           const SizedBox(height: 8),
-                          ...?order.products?.map((p) => Padding(padding: const EdgeInsets.only(bottom: 4.0), child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Expanded(child: Text('• ${p.productId?.name}', overflow: TextOverflow.ellipsis)), Text('x${p.quantity}', style: const TextStyle(color: Colors.grey)), const SizedBox(width: 8), Text('\$${(p.productId.price  * p.quantity).toStringAsFixed(2)}', style: const TextStyle(fontWeight: FontWeight.bold))]))),
+                          ...?order.products?.map((p) => Padding(padding: const EdgeInsets.only(bottom: 4.0), child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Expanded(child: Text('• ${p.product?.name}', overflow: TextOverflow.ellipsis)), Text('x${p.quantity}', style: const TextStyle(color: Colors.grey)), const SizedBox(width: 8), Text('\$${((p.product?.price ?? 0) * p.quantity).toStringAsFixed(2)}', style: const TextStyle(fontWeight: FontWeight.bold))]))),
                         ],
                       ),
                     ),
