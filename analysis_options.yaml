@@ -1,0 +1,18 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    ignore: constant_identifier_names
+    camel_case_types: false
+    camel_case_extensions: false
+    non_constant_identifier_names: false
+    annotate_overrides: false
+    invalid_annotation_target: true
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "**/*.table.dart"
+
+  errors:
+    invalid_annotation_target: ignore

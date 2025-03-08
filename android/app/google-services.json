@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "128990284090",
+    "project_id": "authentication-bb547",
+    "storage_bucket": "authentication-bb547.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:128990284090:android:df05961d55cb4c8457a803",
+        "android_client_info": {
+          "package_name": "com.example.flutter_security"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "128990284090-c1copmqp71ro5ee1kc0c6ggmebqgf6o0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByR_OlUt6nncuqG6X8WO8fSQPwdO3BR70"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "128990284090-c1copmqp71ro5ee1kc0c6ggmebqgf6o0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
